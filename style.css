@@ -1,0 +1,43 @@
+header {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+#top-tile {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: darkgreen;
+  height: 80px;
+
+}
+
+h1 {
+  font-size: 50px;
+  color: wheat;
+}
+
+#add-btn {
+  border-radius: 10px;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+body {
+  margin-top: 100px;
+  background-color: rgb(71, 119, 71);
+}
+
+body p {
+  margin-top: 6.5em;
+  text-align: center;
+  color: greenyellow;
+  font-size: 80px;
+}
+
+body p b {
+  color: rgb(7, 82, 7);
+}

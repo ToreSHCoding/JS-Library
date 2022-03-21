@@ -41,3 +41,39 @@ body p {
 body p b {
   color: rgb(7, 82, 7);
 }
+
+footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 5vh;
+  font-size: 20px;
+  font-family: sans-serif;
+  color: white;
+  background-color: rgb(7, 82, 7);
+  list-style: none;
+}
+
+footer ul{
+  padding: 0;
+  list-style: none;
+}
+
+footer li{
+  display: inline;
+  list-style: none;
+}
+
+footer a{
+  margin-left: 5px;
+  color: white;
+  text-decoration: none;
+  transition: .2s;
+}
+footer a:hover{
+  color: wheat;
+}

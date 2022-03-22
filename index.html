@@ -12,11 +12,41 @@
 <header>
   <nav id="top-tile">
     <h1>Library</h1>
-    <button id="create-btn">NEW BOOK</button>
+    <button class="create-btn">NEW BOOK</button>
   </nav>
 </header>
 <body>
   <p>Click <b>NEW BOOK</b> to begin adding books</p>
+
+  <div class="modal-bg">
+    <div class="modal">
+      <h2>Add a new book</h2>
+      <div class="modal-div">
+        <label for="mod-title">Title: </label>
+        <input type="text" name="mod-title">
+      </div>
+
+      <div class="modal-div">
+        <label for="mod-author">Author: </label>
+        <input type="text" name="mod-author">
+      </div>
+
+      <div class="modal-div">
+        <label for="mod-pages">Pages: </label>
+        <input type="text" name="mod-pages">
+      </div>
+
+      <div class="modal-div">
+        <label for="mod-stat">Read: </label>
+        <input type="checkbox" name="mod-stat" class="modal-check">
+      </div>
+
+      <button id="add-btn">Add</button>
+
+      <span class="modal-close">×</span>
+    </div>
+  </div>
+
   <footer>
     <ul>
       <li>Copyright © <script>document.write(new Date().getFullYear())</script></li>

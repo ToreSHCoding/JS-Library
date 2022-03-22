@@ -1,12 +1,6 @@
-const createBtn = document.querySelector('create-btn')
-
-
-// DO: create modal that appears when createBtn is clicked
-function modal() {
-
-}
-
-// DO: create event listener for createBtn that brings up modal to input information for new Book title, author, pages, readStatus
+const createBtn = document.querySelector('.create-btn');
+const modalBg = document.querySelector('.modal-bg');
+const modalCloseBtn = document.querySelector('.modal-close');
 
 
 let myLibrary = [
@@ -53,6 +47,14 @@ function displayBook() {
   }
 } 
 
+// DO: create event listener for createBtn that brings up modal to input information for new Book title, author, pages, readStatus
+createBtn.addEventListener('click', () => {
+  modalBg.classList.add('modal-active');
+});
+
+modalCloseBtn.addEventListener('click', () => {
+  modalBg.classList.remove('modal-active');
+});
 
 addBookToLibrary()
 

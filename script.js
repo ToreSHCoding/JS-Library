@@ -1,6 +1,14 @@
+const instructions = document.querySelector('#instructions');
 const createBtn = document.querySelector('.create-btn');
 const modalBg = document.querySelector('.modal-bg');
 const modalCloseBtn = document.querySelector('.modal-close');
+const addBtn = document.querySelector('#add-btn');
+
+const formTitleInput = document.querySelector('#form-title');
+const formAuthorInput = document.querySelector('#form-author');
+const formPagesInput = document.querySelector('#form-pages');
+const formReadStatusInput = document.querySelector('#form-status');
+const checkBoxInput = document.querySelector('input[name="mod-stat"]');
 
 
 let myLibrary = [
@@ -18,6 +26,7 @@ function Book(title, author, pages, readStatus) {
   this.author = author
   this.pages = pages
   this.readStatus = readStatus
+
   // this.info = function() {
   //   return `${this.title}, ${this.author}, ${this.pages}, ${this.readStatus}`
   // }
@@ -26,24 +35,72 @@ function Book(title, author, pages, readStatus) {
 // DO: create a function addBookToLibrary() that can push new Book into myLibrary array
   // convert new Book into variable newBook
   // push newBook to myLibrary
-function addBookToLibrary() {
-  let newBook = new Book(title, author, pages, readStatus); 
-  myLibrary.push(newBook);
+function addBookToLibrary(title, author, pages, readStatus) {
+  let newBook = new Book(title, author, pages, readStatus);
 
- 
+  // formTitleInput.value = this.title;
+  // formAuthorInput.value = this.author;
+  // formPagesInput.value = this.pages;
+  // formReadStatusInput = this.readStatus;
+
+  myLibrary.push(newBook);
+  displayBook();
 }
+
+function checkBox() {
+  if (checkBoxInput.checked) {
+    
+  }
+}
+
+// function modalInputs() {
+  
+// }
 
 // DO: create function displayBook that allows new Book to be displayed in modal form
   // this can be done by creating modal that allows prompt to enter title, author, pages, and readStatus
+  // it takes the user's input values and displays them neatly in a box
+  //
   // add eventlistener function delete() that can delete book from myLibrary array 
 function displayBook() {
-  const dispTitle = document.createElement('div');
-  const dispAuthor = document.createElement('div');
-  const dispPages = document.createElement('div');
-  const dispStatus = document.createElement('div');
 
+  const infoBox = document.querySelector('#info-box');
   for (let i = 0; i < myLibrary.length; i++) {
+    const bookBox = document.createElement('div');
+    bookBox.classList.add('box');
+    infoBox.appendChild(bookBox);
+    // title
+    const inputTitle = document.createElement('div');
+    inputTitle.textContent = "Title: " + myLibrary[i].title;
+    bookBox.appendChild(inputTitle);
+    // author
+    const inputAuthor = document.createElement('div');
+    inputAuthor.textContent = "Author: " + myLibrary[i].author;
+    bookBox.appendChild(inputAuthor);
+    // pages
+    const inputPages = document.createElement('div');
+    inputPages.textContent = "Pages: " + myLibrary[i].pages;
+    bookBox.appendChild(inputPages);
+    // readStatus
+    const inputStatus = document.createElement('div');
+    const inputStatusSymbol = document.createElement('b');
+    if (myLibrary[i].readStatus === false) {
+      inputStatusSymbol.textContent = "Unread";
+      inputStatusSymbol.classList.add('red-unread');
+    } else {
+      inputStatusSymbol.textContent = "Read";
+      inputStatusSymbol.classList.add('green-read');
+    }
+    inputStatus.appendChild(inputStatusSymbol);
+    bookBox.appendChild(inputStatus);
+    // deleteBtn
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
+    bookBox.appendChild(deleteBtn);
 
+    deleteBtn.addEventListener('click', () => {
+
+    })
   }
 } 
 
@@ -56,6 +113,9 @@ modalCloseBtn.addEventListener('click', () => {
   modalBg.classList.remove('modal-active');
 });
 
-addBookToLibrary()
+addBtn.addEventListener('click', () => {
+  instructions.textContent = '';
+  displayBook()
+})
 
 

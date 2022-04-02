@@ -9,7 +9,7 @@ const formAuthorInput = document.querySelector('#form-author');
 const formPagesInput = document.querySelector('#form-pages');
 const formReadStatusInput = document.querySelector('#form-status');
 
-// for checkBox function
+// for checkBoxFunc function
 const checkBoxInput = document.querySelector('input[name="mod-stat"]');
 
 
@@ -45,16 +45,6 @@ function addBookToLibrary(title, author, pages, readStatus) {
   displayBook();
 }
 
-// function checkBox() {
-//   if (checkBoxInput.checked) {
-    
-//   }
-// }
-
-// function modalInputs() {
-  
-// }
-
 // DO: create function displayBook that allows new Book to be displayed in modal form
   // this can be done by creating modal that allows prompt to enter title, author, pages, and readStatus
   // it takes the user's input values and displays them neatly in a box
@@ -69,41 +59,55 @@ function displayBook() {
     infoBox.appendChild(bookBox);
     // title
     const inputTitle = document.createElement('div');
-    inputTitle.textContent = "Title: " + myLibrary[i].title;
+    inputTitle.innerHTML = `Title: "${myLibrary[i].title}"`;
+    inputTitle.classList.add('align');
     bookBox.appendChild(inputTitle);
     // author
     const inputAuthor = document.createElement('div');
     inputAuthor.textContent = "Author: " + myLibrary[i].author;
+    inputAuthor.classList.add('align');
     bookBox.appendChild(inputAuthor);
     // pages
     const inputPages = document.createElement('div');
     inputPages.textContent = "Pages: " + myLibrary[i].pages;
+    inputPages.classList.add('align');
     bookBox.appendChild(inputPages);
     // readStatus
     const inputStatus = document.createElement('div');
     const inputStatusSymbol = document.createElement('b');
-    if (myLibrary[i].readStatus === false) {
-      inputStatusSymbol.textContent = "Unread";
-      inputStatusSymbol.classList.add('red-unread');
+
+    if (checkBoxInput.checked == false) {
+      inputStatusSymbol.textContent = "Unread ☓";
+      inputStatusSymbol.classList.add('unread');
     } else {
-      inputStatusSymbol.textContent = "Read";
-      inputStatusSymbol.classList.add('green-read');
+      inputStatusSymbol.textContent = "Read ✓";
+      inputStatusSymbol.classList.add('read');
     }
     inputStatus.appendChild(inputStatusSymbol);
     bookBox.appendChild(inputStatus);
     // deleteBtn
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Delete';
+    deleteBtn.classList.add('delete-btn');
     bookBox.appendChild(deleteBtn);
 
     // makes sure the same book is not added again after pressing add button
     myLibrary.length = 0;
 
     deleteBtn.addEventListener('click', () => {
-
+      bookBox.remove();
     })
   }
 } 
+
+function formValidity() {
+  if (inputTitle = `Title: ${""}`) {
+    alert("Please enter the title.")
+    return
+  } else {
+    modalBg.classList.toggle('modal-active')
+  }
+}
 
 // DO: create event listener for createBtn that brings up modal to input information for new Book title, author, pages, readStatus
 createBtn.addEventListener('click', () => {
@@ -115,6 +119,7 @@ modalCloseBtn.addEventListener('click', () => {
 });
 
 addBtn.addEventListener('click', () => {
+  modalBg.classList.remove('modal-active');
   instructions.textContent = '';
   addBookToLibrary()
 })

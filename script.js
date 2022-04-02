@@ -8,24 +8,26 @@ const formTitleInput = document.querySelector('#form-title');
 const formAuthorInput = document.querySelector('#form-author');
 const formPagesInput = document.querySelector('#form-pages');
 const formReadStatusInput = document.querySelector('#form-status');
+
+// for checkBox function
 const checkBoxInput = document.querySelector('input[name="mod-stat"]');
 
 
 let myLibrary = [
-  {
-    title: '1984',
-    author: 'George Orwell',
-    pages: '328',
-    readStatus: true
-  }
+  // {
+  //   title: '1984',
+  //   author: 'George Orwell',
+  //   pages: '328',
+  //   readStatus: true
+  // }
 ];
 
 // DO: create the Book object constructor
 function Book(title, author, pages, readStatus) {
-  this.title = title
-  this.author = author
-  this.pages = pages
-  this.readStatus = readStatus
+  this.title = formTitleInput.value
+  this.author = formAuthorInput.value
+  this.pages = formPagesInput.value
+  this.readStatus = formReadStatusInput.value
 
   // this.info = function() {
   //   return `${this.title}, ${this.author}, ${this.pages}, ${this.readStatus}`
@@ -38,20 +40,16 @@ function Book(title, author, pages, readStatus) {
 function addBookToLibrary(title, author, pages, readStatus) {
   let newBook = new Book(title, author, pages, readStatus);
 
-  // formTitleInput.value = this.title;
-  // formAuthorInput.value = this.author;
-  // formPagesInput.value = this.pages;
-  // formReadStatusInput = this.readStatus;
 
   myLibrary.push(newBook);
   displayBook();
 }
 
-function checkBox() {
-  if (checkBoxInput.checked) {
+// function checkBox() {
+//   if (checkBoxInput.checked) {
     
-  }
-}
+//   }
+// }
 
 // function modalInputs() {
   
@@ -98,6 +96,9 @@ function displayBook() {
     deleteBtn.textContent = 'Delete';
     bookBox.appendChild(deleteBtn);
 
+    // makes sure the same book is not added again after pressing add button
+    myLibrary.length = 0;
+
     deleteBtn.addEventListener('click', () => {
 
     })
@@ -115,7 +116,7 @@ modalCloseBtn.addEventListener('click', () => {
 
 addBtn.addEventListener('click', () => {
   instructions.textContent = '';
-  displayBook()
+  addBookToLibrary()
 })
 
 

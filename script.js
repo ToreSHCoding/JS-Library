@@ -8,6 +8,7 @@ const formTitleInput = document.querySelector('#form-title');
 const formAuthorInput = document.querySelector('#form-author');
 const formPagesInput = document.querySelector('#form-pages');
 const formReadStatusInput = document.querySelector('#form-status');
+const bookIndex = document.querySelectorAll('[data-indexNum]');
 
 // for checkBoxFunc function
 const checkBoxInput = document.querySelector('input[name="mod-stat"]');
@@ -26,7 +27,7 @@ let myLibrary = [
 function Book(title, author, pages, readStatus) {
   this.title = formTitleInput.value
   this.author = formAuthorInput.value
-  this.pages = formPagesInput.value
+  this.pages = formPagesInput.value + 'pages'
   this.readStatus = formReadStatusInput.checked
 
   // this.info = function() {
@@ -57,6 +58,8 @@ function displayBook(bookItem) {
   for (let i = 0; i < myLibrary.length; i += 1) {
     const bookBox = document.createElement('div');
     bookBox.classList.add('box');
+    bookBox.dataset.indexNum = myLibrary.indexOf(bookItem);
+
     infoBox.appendChild(bookBox);
     // title
     const inputTitle = document.createElement('div');
@@ -105,9 +108,9 @@ function displayBook(bookItem) {
     // const recentObject = myLibrary[myLibrary.length - 1]
 
     deleteBtn.addEventListener('click', () => {
-      myLibrary.splice(myLibrary.indexOf(bookItem))
+      myLibrary.splice(myLibrary.indexOf(bookBox.dataset.indexNum));
       bookBox.remove();
-    })
+    }) 
   }
 } 
 
@@ -120,6 +123,12 @@ function formValidity() {
   }
 }
 
+function formReset() {
+  formTitleInput.value = '';
+  formAuthorInput.value = '';
+  formPagesInput.value = '';
+}
+
 // DO: create event listener for createBtn that brings up modal to input information for new Book title, author, pages, readStatus
 createBtn.addEventListener('click', () => {
   modalBg.classList.add('modal-active');
@@ -127,12 +136,14 @@ createBtn.addEventListener('click', () => {
 
 modalCloseBtn.addEventListener('click', () => {
   modalBg.classList.remove('modal-active');
+  formReset();
 });
 
 addBtn.addEventListener('click', () => {
   modalBg.classList.remove('modal-active');
   instructions.textContent = '';
-  addBookToLibrary()
+  formReset();
+  addBookToLibrary();
 })
 
 

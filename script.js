@@ -27,7 +27,7 @@ let myLibrary = [
 function Book(title, author, pages, readStatus) {
   this.title = formTitleInput.value
   this.author = formAuthorInput.value
-  this.pages = formPagesInput.value + 'pages'
+  this.pages = formPagesInput.value + ' pp.'
   this.readStatus = formReadStatusInput.checked
 
   // this.info = function() {
@@ -58,7 +58,7 @@ function displayBook(bookItem) {
   for (let i = 0; i < myLibrary.length; i += 1) {
     const bookBox = document.createElement('div');
     bookBox.classList.add('box');
-    bookBox.dataset.indexNum = myLibrary.indexOf(bookItem);
+    // bookBox.dataset.indexNum = myLibrary.indexOf(bookItem);
 
     infoBox.appendChild(bookBox);
     // title
@@ -74,7 +74,7 @@ function displayBook(bookItem) {
     // pages
     const inputPages = document.createElement('div');
     inputPages.textContent = "Pages: " + myLibrary[i].pages;
-    inputPages.classList.add('align');
+    inputPages.classList.add('align', 'pg');
     bookBox.appendChild(inputPages);
     // readStatus
     const inputStatus = document.createElement('div');
@@ -110,6 +110,7 @@ function displayBook(bookItem) {
     deleteBtn.addEventListener('click', () => {
       myLibrary.splice(myLibrary.indexOf(bookBox.dataset.indexNum));
       bookBox.remove();
+      emptyArray();
     }) 
   }
 } 
@@ -120,6 +121,12 @@ function formValidity() {
     return
   } else {
     modalBg.classList.toggle('modal-active')
+  }
+}
+
+function emptyArray() {
+  if (myLibrary.length === 0) {
+    instructions.innerHTML = 'Click <b>NEW BOOK</b> to begin adding books'
   }
 }
 
@@ -142,7 +149,7 @@ modalCloseBtn.addEventListener('click', () => {
 addBtn.addEventListener('click', () => {
   modalBg.classList.remove('modal-active');
   instructions.textContent = '';
-  formReset();
+  // formReset();
   addBookToLibrary();
 })
 

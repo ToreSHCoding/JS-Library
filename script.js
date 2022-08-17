@@ -10,6 +10,8 @@ const formPagesInput = document.querySelector('#form-pages');
 const formReadStatusInput = document.querySelector('#form-status');
 const bookIndex = document.querySelectorAll('[data-indexNum]');
 
+let titleValid = document.querySelector('#title-validation');
+
 // for checkBoxFunc function
 const checkBoxInput = document.querySelector('input[name="mod-stat"]');
 
@@ -24,26 +26,39 @@ let myLibrary = [
 ];
 
 // DO: create the Book object constructor
-function Book(title, author, pages, readStatus) {
-  this.title = formTitleInput.value
-  this.author = formAuthorInput.value
-  this.pages = formPagesInput.value + ' pp.'
-  this.readStatus = formReadStatusInput.checked
-
-  // this.info = function() {
-  //   return `${this.title}, ${this.author}, ${this.pages}, ${this.readStatus}`
-  // }
+class Book {
+  constructor(title, author, pages, readStatus) {
+    this.title = title
+    this.author = author
+    this.pages = pages + ' pp.'
+    this.readStatus = readStatus
+  
+    // this.info = function() {
+    //   return `${this.title}, ${this.author}, ${this.pages}, ${this.readStatus}`
+    // }
+  }
 }
 
 // DO: create a function addBookToLibrary() that can push new Book into myLibrary array
   // convert new Book into variable newBook
   // push newBook to myLibrary
 function addBookToLibrary(title, author, pages, readStatus) {
-  let newBook = new Book(title, author, pages, readStatus);
+  let newBook = new Book(formTitleInput.value, formAuthorInput.value, formPagesInput.value, formReadStatusInput.checked);
 
 
   myLibrary.push(newBook);
-  displayBook();
+  displayBookScreen();
+}
+
+function displayBookScreen() {
+  const infoBoxes = document.getElementById('info-box');
+  const boxes = document.querySelectorAll('.box');
+  boxes.forEach(box => infoBoxes.removeChild(box)); 
+  infoBoxes.textContent = '';
+
+  for (i = 0; i < myLibrary.length; i++) {
+    displayBook(myLibrary[i]);
+  }
 }
 
 // DO: create function displayBook that allows new Book to be displayed in modal form
@@ -55,10 +70,11 @@ function displayBook(bookItem) {
 
   const infoBox = document.querySelector('#info-box');
   infoBox.textContent = '';
-  for (let i = 0; i < myLibrary.length; i += 1) {
+  for (let i = 0; i < myLibrary.length; i++) {
     const bookBox = document.createElement('div');
     bookBox.classList.add('box');
-    // bookBox.dataset.indexNum = myLibrary.indexOf(bookItem);
+    // bookBox.setAttribute("data-indexNum", myLibrary.indexOf(this));
+    // bookBox.dataset.indexNum = myLibrary[i];
 
     infoBox.appendChild(bookBox);
     // title
@@ -86,7 +102,15 @@ function displayBook(bookItem) {
     //   checkBoxInput.checked === true;
     // }
 
-    if (myLibrary[i].readStatus === false) {
+    // if (bookItem.readStatus === false) {
+    //   inputStatusSymbol.textContent = "Unread ☓";
+    //   inputStatusSymbol.classList.add('unread');
+    // } else {
+    //   inputStatusSymbol.textContent = "Read ✓";
+    //   inputStatusSymbol.classList.add('read');
+    // }
+
+        if (myLibrary[i].readStatus === false) {
       inputStatusSymbol.textContent = "Unread ☓";
       inputStatusSymbol.classList.add('unread');
     } else {
@@ -108,20 +132,23 @@ function displayBook(bookItem) {
     // const recentObject = myLibrary[myLibrary.length - 1]
 
     deleteBtn.addEventListener('click', () => {
-      myLibrary.splice(myLibrary.indexOf(bookBox.dataset.indexNum));
       bookBox.remove();
+      myLibrary.splice(i, 1);
       emptyArray();
     }) 
   }
 } 
 
+
 function formValidity() {
-  if (inputTitle = `Title: ${""}`) {
-    alert("Please enter the title.")
-    return
-  } else {
-    modalBg.classList.toggle('modal-active')
-  }
+  let titleValue = document.getElementById("form-title").value;
+  let titleValidation;
+  
+  if (titleValue = `Title: "${''}"`) {
+    titleValidation = "Please enter the title";
+
+  } 
+  document.getElementById("title-validation").innerHTML = titleValidation;
 }
 
 function emptyArray() {
@@ -134,6 +161,7 @@ function formReset() {
   formTitleInput.value = '';
   formAuthorInput.value = '';
   formPagesInput.value = '';
+  checkBoxInput.checked = false;
 }
 
 // DO: create event listener for createBtn that brings up modal to input information for new Book title, author, pages, readStatus
@@ -149,8 +177,9 @@ modalCloseBtn.addEventListener('click', () => {
 addBtn.addEventListener('click', () => {
   modalBg.classList.remove('modal-active');
   instructions.textContent = '';
-  // formReset();
   addBookToLibrary();
-})
+  formValidity();
+  formReset();
+});
 
 

@@ -47,25 +47,30 @@ function addBookToLibrary(title, author, pages, readStatus) {
 
 
   myLibrary.push(newBook);
-  displayBookScreen();
+  // displayBookScreen();
+  displayBook();
+  console.log(myLibrary);
 }
 
-function displayBookScreen() {
-  const infoBoxes = document.getElementById('info-box');
-  const boxes = document.querySelectorAll('.box');
-  boxes.forEach(box => infoBoxes.removeChild(box)); 
-  infoBoxes.textContent = '';
+// function displayBookScreen() {
+//   const infoBoxes = document.getElementById('info-box');
+//   const boxes = document.querySelectorAll('.box');
+//   boxes.forEach(box => infoBoxes.removeChild(box)); 
+//   infoBoxes.textContent = '';
 
-  for (i = 0; i < myLibrary.length; i++) {
-    displayBook(myLibrary[i]);
-  }
-}
+//   // for (i = 0; i < myLibrary.length; i++) {
+//   //   displayBook(myLibrary[i]);
+//   //   console.log(myLibrary)
+//   // }
+// }
 
 // DO: create function displayBook that allows new Book to be displayed in modal form
   // this can be done by creating modal that allows prompt to enter title, author, pages, and readStatus
   // it takes the user's input values and displays them neatly in a box
   //
   // add eventlistener function delete() that can delete book from myLibrary array 
+
+  // -------- EXPERIMENT BRANCH TESTING ----------
 function displayBook(bookItem) {
 
   const infoBox = document.querySelector('#info-box');
@@ -74,9 +79,10 @@ function displayBook(bookItem) {
     const bookBox = document.createElement('div');
     bookBox.classList.add('box');
     // bookBox.setAttribute("data-indexNum", myLibrary.indexOf(this));
-    // bookBox.dataset.indexNum = myLibrary[i];
+    bookBox.dataset.indexNum = i;
 
     infoBox.appendChild(bookBox);
+
     // title
     const inputTitle = document.createElement('div');
     inputTitle.textContent = `Title: "${myLibrary[i].title}"`;
@@ -133,8 +139,9 @@ function displayBook(bookItem) {
 
     deleteBtn.addEventListener('click', () => {
       bookBox.remove();
-      myLibrary.splice(i, 1);
+      myLibrary.splice(bookBox.dataset.indexNum, 1);
       emptyArray();
+      console.log(myLibrary);
     }) 
   }
 } 

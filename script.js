@@ -21,7 +21,7 @@ const checkBoxInput = document.querySelector('input[name="mod-stat"]');
 // IMPORTANT: FIX THE DISPLAYBOOK FUNCTION TO ALLOW ARRAY AND DOM ELEMENTS TO CORRESPOND WITH EACH OTHER PROPERLY WHEN PRESSING DELETE OR EDITING
 // 
 // 
-// 
+
 
 
 let myLibrary = [
